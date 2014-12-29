@@ -1,0 +1,987 @@
+reStructuredText Manual
+###############################
+::
+
+  .. toctree::
+
+     :maxdepth: 2
+     :numbered:            使各文档自动编号
+
+
+::
+
+  文档主标题
+  ===========
+
+  二级标题
+  ------------
+
+文档主标题
+===========
+
+二级标题
+------------
+
+::
+
+  .. note::
+
+     - 下划线长度应大于文字长度
+     - 标题级别和下划线一般无对应，文档中保持一致即可。
+     - 标题级别一般按以下次序:
+
+       * ``#`` with overline, for parts
+       * ``*`` with overline, for chapters
+       * ``=``, for sections
+       * ``-``, for subsections
+       * ``^``, for subsubsections
+       * ``"``, for paragraphs
+
+.. note::
+
+   - 下划线长度应大于文字长度
+   - 标题级别和下划线一般无对应，文档中保持一致即可。
+   - 标题级别一般按以下次序:
+
+     * ``#`` with overline, for parts
+     * ``*`` with overline, for chapters
+     * ``=``, for sections
+     * ``-``, for subsections
+     * ``^``, for subsubsections
+     * ``"``, for paragraphs
+
+
+Sphinx工程的目录结构
+========================
+
+::
+
+  ├── Makefile
+  ├── make.bat
+  └── source
+      ├── conf.py         <-- 配置文件，按下面修改
+      ├── _templates      <-- 模板文件，不需要改动
+      ├── _themes         <-- 样式文件，不需要改动
+      ├── index.rst       <-- 文档入口，根据章节修改
+      ├── *.rst           <-- 文档章节，请删除
+      └── images          <-- 静态资源，根据引用路径取目录名，请删除此目录
+          └── *.png
+
+模板修改
+----------
+（参见：http://sphinx-doc.org/theming.html）
+
+修改文件 `conf.py` 中 `html_theme = 'default'` 选项（builtin themes）：
+
+- default
+- sphinxdoc
+- nature
+- pyramid
+- haiku
+- traditional
+- scrolls
+- agogo
+
+固定边栏：
+html_theme_options = {"stickysidebar":"True"}
+
+段落
+======
+空行分段
+------------
+::
+
+  第一段内容
+
+  第二段内容和第一段之间有一空行
+
+  第一段内容
+
+  第二段内容和第一段之间有一空行
+
+自动续行
+---------
+::
+
+  一个回车部分段，
+  本行续上行
+
+一个回车部分段，
+本行续上行
+
+不留白续行
+----------
+::
+
+  行尾转移字符\
+  续行之间不留白。
+
+行尾转移字符\
+续行之间不留白。
+
+插入换行
+----------
+::
+
+  | 保持现有格式
+  | 不换行(注意符号``|``之后有空格)
+
+| 保持现有格式
+| 不换行(注意符号``|``之后有空格)
+
+**下面的方法有点问题**
+::
+
+  .. role:: raw-html(raw)
+     :format: html
+
+     用新定义的role插入换行，
+     :raw-html:`<br />`
+     本行不续行
+
+.. role:: raw-html(raw)
+   :format: html
+
+用新定义的role插入换行，
+raw-html:`<br />`
+本行不续行
+
+段落缩进
+---------
+::
+
+  邮件体段落缩进：
+
+    第一级段落缩进
+
+      第二级段落缩进
+
+    返回第一级段落缩进
+
+邮件体段落缩进：
+
+  第一级段落缩进
+
+    第二级段落缩进
+
+  返回第一级段落缩进
+
+即相同缩进量的段落对齐，同python段落缩进模式。
+
+::
+
+  | 这些行
+  | 在源文件里
+  | 被分隔的一模一样.
+
+
+  格言::
+
+    - 路漫漫其修远兮
+    - 吾将上下而求索
+
+  有空白 ::
+
+    路漫漫其修远兮
+    吾将上下而求索
+
+| 这些行
+| 在源文件里
+| 被分隔的一模一样.
+
+
+格言::
+
+  - 路漫漫其修远兮
+  - 吾将上下而求索
+
+有空白 ::
+
+  路漫漫其修远兮
+  吾将上下而求索
+
+代码块
+=========
+::
+
+  双冒号后为缩进的代码块：
+  ::
+
+    $ printf "Hello, World.\n"
+
+  声明语言类型实现语法高亮模式(如：C++)
+
+  .. code-block:: c++
+    :linenos:
+
+    #include <iostream>
+    using namespace std;
+
+    int main()
+    {
+      cout<<"Hello World!"<<endl;
+      return 0;
+    }
+
+双冒号后为缩进的代码块：
+::
+
+   $ printf "Hello, World.\n"
+
+声明语言类型实现语法高亮模式(如：C++)
+
+.. code-block:: c++
+  :linenos:
+
+  #include <iostream>
+  using namespace std;
+
+  int main()
+  {
+    cout<<"Hello World!"<<endl;
+    return 0;
+  }
+
+外部包含：
+::
+
+  .. literalinclude:: cpptest.cpp
+     :language: c++
+
+.. literalinclude:: cpptest.cpp
+    :language: c++
+
+.. note::
+
+   注意上述代码中的空行，双冒号（或声明语言行后），空一行，代码块须向右缩进。
+
+   :linenos: 表示显示行号
+
+列表
+=========
+
+无序列表
+---------
+::
+
+  - 条目
+  - 条目
+
+    - 条目
+    - 条目
+
+      - 条目
+
+  - 条目
+
+- 条目
+- 条目
+
+  - 条目
+  - 条目
+
+     - 条目
+
+- 条目
+
+::
+
+  * 星号、减号、加号开始列表。
+
+    - 列表层级与缩进有关
+
+      × 和具体符号无关
+
+  * 返回到第一级列表
+
+* 星号、减号、加号开始列表。
+
+  - 列表层级与缩进有关
+
+    × 和具体符号无关
+
+* 返回到第一级列表
+
+有序列表
+-------------
+::
+
+  1. 数字和点是一种标号方式。
+
+    A. 大写字母编号。
+
+       a. 小写字母编号。
+
+  2. 继续第一级标号。
+
+    (I) 大写字母编号。
+
+      i) 小写字母编号。
+
+1. 数字和点是一种标号方式。
+
+  A. 大写字母编号。
+
+     a. 小写字母编号。
+
+2. 继续第一级标号。
+
+  (I) 大写字母编号。
+
+    i) 小写字母编号。
+
+自动编号
+----------
+::
+
+  3. 第三条
+
+  #. 第四条
+
+  7. 重新设定序号
+
+  #. 继续
+
+3. 第三条
+
+#. 第四条
+
+7. 重新设定序号
+
+#. 继续
+
+
+列表中的续行、段落和代码块
+-----------------------------
+::
+
+  1. 列表项可以折行，
+     对齐则自动续行。
+
+  2. 列表中多个段落
+
+     空行开始新段落，
+     新段落要和列表项内容对齐。
+
+  3. 列表中代码块注意对齐：
+     ::
+
+       $ printf "Hello World. \n"
+
+1. 列表项可以折行，
+   对齐则自动续行。
+
+2. 列表中多个段落
+
+   空行开始新段落，
+   新段落要和列表项内容对齐。
+
+3. 列表中代码块注意对齐：
+   ::
+
+     $ printf "Hello World. \n"
+
+
+定义
+=======
+::
+
+  git
+    Simple and beautiful.
+
+  hg
+    Another DVCS.
+
+  subersion
+    VCS with many constrains.
+
+    Why not Git?
+
+git
+  Simple and beautiful.
+
+hg
+  Another DVCS.
+
+subersion
+  VCS with many constrains.
+
+  Why not Git?
+
+分割线
+=========
+四条或以上短线显示为分割线
+::
+
+  ----
+
+----
+
+字体
+==========
+::
+
+  这是 **粗体** 符号前后均需用空格隔开
+
+  这是 *斜体*
+  
+  这是 ``代码引用`` 可以输入 ``++ --`` ，而非代码引用效果为： ++ --
+
+  这是不留白的\ **粗体**\ 和\ *斜体*\的效果。
+
+这是 **粗体** 符号前后均需用空格隔开
+
+这是 *斜体*
+
+这是 ``代码引用`` 可以输入 ``++ --`` ，而非代码引用效果为： ++ --
+
+这是不留白的\ **粗体**\ 和\ *斜体*\的效果。
+
+::
+
+  .. role:: strike
+     :class: strike
+
+  :strike:`删除线` 效果
+
+  不留白的\ :strike:`删除线`\ 效果
+
+  .. role:: ul
+     :class: underline
+
+  :ul:`下划线` 效果
+
+  不留白的\ :ul:`下划线`\ 效果
+
+
+.. role:: strike
+   :class: strike
+
+:strike:`删除线` 效果
+
+不留白的\ :strike:`删除线`\ 效果
+
+.. role:: ul
+   :class: underline
+
+:ul:`下划线` 效果
+
+不留白的\ :ul:`下划线`\ 效果
+
+::
+
+  上标、下标
+  -----------
+
+  - Water: H\ :sub:`2`\ O
+  - E=mc\ :sup:`2`
+
+  等宽字体
+  -----------
+
+  两个连续反引号嵌入代码，如：``git status``。
+
+  引言
+  -------
+
+  `Got Github` by me
+
+  清除标记空白
+  ------------
+
+  标记符号前后空白用\ **反斜线**\ 消除
+
+上标、下标
+-----------
+
+- Water: H\ :sub:`2`\ O
+- E=mc\ :sup:`2`
+
+等宽字体
+-----------
+
+两个连续反引号嵌入代码，如：``git status``。
+
+引言
+--------
+
+`Got Github` by me
+
+清除标记空白
+-------------
+
+标记符号前后空白用\ **反斜线**\ 消除
+
+
+链接
+==========
+::
+
+  URL自动连接
+  -----------
+
+  - 北京大学 http://www.pku.edu.cn
+  - 未名bbs http://bbs.pku.edu.cn
+  - 邮箱 conderls@sina.com
+
+  文字连接
+  ------------
+
+  - 访问 `北京大学 <http://www.pku.edu.cn>`_ 。
+  - 上面已经定义，直接引用 北京大学_ 链接。
+  - 链接地址在后面说明，如： 未名bbs_ 。
+  - 反引号括起多个单词链接，如： `pku homepage`_ 。
+
+  .. _未名bbs: http://bbs.pku.edu.cn
+  .. _pku homepage: http://www.pku.edu.cn
+
+URL自动连接
+-----------
+
+- 北京大学 http://www.pku.edu.cn
+- 未名bbs http://bbs.pku.edu.cn
+
+文字连接：
+------------
+
+- 访问 `北京大学 <http://www.pku.edu.cn>`_ 。
+- 上面已经定义，直接引用 北京大学_ 链接。
+- 链接地址在后面说明，如： 未名bbs_ 。
+- 反引号括起多个单词链接，如： `pku homepage`_ 。
+
+.. _未名bbs: http://bbs.pku.edu.cn
+.. _pku homepage: http://www.pku.edu.cn
+
+
+内部跳转
+----------
+::
+
+  .. _fig1:
+
+  .. figure:: _static/pic/more.png
+
+    内部跳转示例
+
+  - 通过 fig1_ 跳转
+  - 通过 `点击这里 <#fig1>`_ 跳转
+  - 参见 :ref:`fig1`\ 。
+
+.. _fig1:
+
+.. figure:: _static/pic/more.png
+
+  内部跳转示例
+
+- 通过 fig1_ 跳转
+- 通过 `点击这里 <#fig1>`_ 跳转
+- 参见 :ref:`fig1`\ 。
+
+章节之间跳转
+-------------------
+
+::
+
+  各个章节的首页一般是 index.rst
+  头一行，习惯性加个声明：
+  .. _chapter1index:
+
+  那么，在其它任意文本中可随时引用：
+  :ref:`首页 <homeindex>`指向首页的链接。
+
+| 那么，在其它任意文本中可随时引用：
+| :ref:`首页 <homeindex>` 指向首页的链接。
+
+对于中文标题有可能产生的锚点只是#id56形式，没有正式链接跳转。需要创建形如以下形式的锚点
+
+::
+
+  .. custum_id:
+
+  title
+  =============
+
+
+脚注
+------------
+::
+
+  - 脚注即可以手动分配数字 [1]_ ，
+    也可以使用井号自动分配 [#]_ 。
+
+  - 自动分配脚注 [#label]_ 也可以用
+    添加标签形式 [#label]_ 多次引用。
+
+  - 还支持用星号嵌入符号式脚注 [#label]_ ，
+    如这个 [*]_ 和 这个 [*]_ 再加一个 [*]_
+    再加一个 [*]_ 再加一个 [*]_ 。
+    a [#f1]_ b [#f2]_。
+
+  - 使用单词做标识亦可 [CIT2012]_ 。
+
+
+  .. [1] 数字编号脚注。
+  .. [#] 井号自动编号。
+  .. [#label] 井号添加标签以便多次引用。
+  .. [*] 星号自动用符号做脚注标记。
+  .. [*] 星号自动用符号做脚注标记。
+  .. [*] 星号自动用符号做脚注标记。
+  .. [*] 星号自动用符号做脚注标记。
+  .. [*] 星号自动用符号做脚注标记。
+  .. [#f1] af
+  .. [#f2] bf
+  .. [CIT2012] 单词或其他规定格式。
+
+
+
+- 脚注即可以手动分配数字 [1]_ ，
+  也可以使用井号自动分配 [#]_ 。
+
+- 自动分配脚注 [#label]_ 也可以用
+  添加标签形式 [#label]_ 多次引用。
+
+- 还支持用星号嵌入符号式脚注 [#label]_ ，
+  如这个 [*]_ 和 这个 [*]_ 再加一个 [*]_ 再加一个 [*]_ 再加一个 [*]_ 。
+  a [#f1]_ b [#f2]_。
+
+- 使用单词做标识亦可 [CIT2012]_ 。
+
+
+.. [1] 数字编号脚注。
+.. [#] 井号自动编号。
+.. [#label] 井号添加标签以便多次引用。
+.. [*] 星号自动用符号做脚注标记。
+.. [*] 星号自动用符号做脚注标记。
+.. [*] 星号自动用符号做脚注标记。
+.. [*] 星号自动用符号做脚注标记。
+.. [*] 星号自动用符号做脚注标记。
+.. [#f1] af
+.. [#f2] bf
+.. [CIT2012] 单词或其他规定格式。
+
+图片
+=========
+::
+
+  .. figure:: _static/pic/logo.png
+     :width: 60
+
+     图：more
+
+  - GitHub Logo: |octocat|
+  - 带链接的图片：
+    |imglink|_
+  - 下图向右浮动。
+     .. image:: _static/pic/logo.png
+        :align: right
+
+  .. |octocat| image:: _static/pic/logo.png
+  .. |imglink| image:: _static/pic/logo.png
+  .. _imglink: https://github.com/
+
+
+.. figure:: _static/pic/logo.png
+   :width: 60
+
+   图：more
+
+- GitHub Logo: |octocat|
+- 带链接的图片：
+  |imglink|_
+- 下图向右浮动。
+   .. image:: _static/pic/logo.png
+      :align: right
+
+.. |octocat| image:: _static/pic/logo.png
+.. |imglink| image:: _static/pic/logo.png
+.. _imglink: https://github.com/
+
+
+
+表格
+===========
+简单表格
+-------------------
+::
+
+  +------------+------------+-----------+
+  | Header 1   | Header 2   | Header 3  |
+  +============+============+===========+
+  | body row 1 | column 2   | column 3  |
+  +------------+------------+-----------+
+  | body row 2 | Cells may span columns.|
+  +------------+------------+-----------+
+  | body row 3 | Cells may  | - Cells   |
+  +------------+ span rows. |           |
+  | body row 4 |            |           |
+  +------------+------------+-----------+
+
+   .. table:: 示例表格
+     :class: classic
+
+     +---------+--------+--------+
+     | head1   | head2  | head3  |
+     +=========+========+========+
+     |         | cell   | cell   |
+     | rowspan +--------+--------+
+     |         | * colspan       |
+     |         | * another line  |
+     +---------+-----------------+
+
+
+
++------------+------------+-----------+
+| Header 1   | Header 2   | Header 3  |
++============+============+===========+
+| body row 1 | column 2   | column 3  |
++------------+------------+-----------+
+| body row 2 | Cells may span columns.|
++------------+------------+-----------+
+| body row 3 | Cells may  | - Cells   |
++------------+ span rows. |           |
+| body row 4 |            |           |
++------------+------------+-----------+
+
+
+
+.. table:: 示例表格
+   :class: classic
+
+   +---------+--------+--------+
+   | head1   | head2  | head3  |
+   +=========+========+========+
+   |         | cell   | cell   |
+   | rowspan +--------+--------+
+   |         | * colspan       |
+   |         | * another line  |
+   +---------+-----------------+
+
+::
+
+   =====  =====  ======
+      Inputs     Output
+   ------------  ------
+     A      B    A or B
+   =====  =====  ======
+   False  False  False
+   True   False  True
+   False  True   True
+   True   True   True
+   =====  =====  ======
+
+=====  =====  ======
+   Inputs     Output
+------------  ------
+  A      B    A or B
+=====  =====  ======
+False  False  False
+True   False  True
+False  True   True
+True   True   True
+=====  =====  ======
+
+CSV表格
+---------------
+::
+
+  .. csv-table:: Frozen Delights!
+
+   :header: "Treat", "Quantity", "Description"
+   :widths: 15, 10, 30
+
+   "Albatross", 2.99, "On a stick!"
+   "Crunchy Frog", 1.49, "If we took the bones out, it wouldn't be
+   crunchy, now would it?"
+   "Gannet Ripple", 1.99, "On a stick!"
+
+.. csv-table:: Frozen Delights!
+
+ :header: "Treat", "Quantity", "Description"
+ :widths: 15, 10, 30
+
+ "Albatross", 2.99, "On a stick!"
+ "Crunchy Frog", 1.49, "If we took the bones out, it wouldn't be
+ crunchy, now would it?"
+ "Gannet Ripple", 1.99, "On a stick!"
+
+列表格
+-------------------
+::
+
+  .. list-table:: Frozen Delights!
+    :widths: 15 10 30
+    :header-rows: 1
+
+    * - Treat
+      - Quantity
+      - Description
+    * - Albatross
+      - 2.99
+      - On a stick!
+    * - Crunchy Frog
+      - 1.49
+      - If we took the bones out, it wouldn't be
+        crunchy, now would it?
+    * - Gannet Ripple
+      - 1.99
+      - On a stick!
+
+.. list-table:: Frozen Delights!
+  :widths: 15 10 30
+  :header-rows: 1
+
+  * - Treat
+    - Quantity
+    - Description
+  * - Albatross
+    - 2.99
+    - On a stick!
+  * - Crunchy Frog
+    - 1.49
+    - If we took the bones out, it wouldn't be
+      crunchy, now would it?
+  * - Gannet Ripple
+    - 1.99
+    - On a stick!
+
+
+::
+
+  .. hlist::
+     :columns: 3
+
+     * 列表
+     * 的子
+     * 项会
+     * 水平
+     * 排列
+
+.. hlist::
+   :columns: 3
+
+   * 列表
+   * 的子
+   * 项会
+   * 水平
+   * 排列
+
+--------------------------------------------
+
+数学公式
+==============
+在配置中添加：
+::
+
+  extensions = ['sphinx.ext.mathjax']
+  mathjax_url = ('http://cdn.mathjax.org/mathjax/latest/MathJax.js?'
+                     'config=TeX-AMS-MML_HTMLorMML')
+
+就可以使用math::块声明进行公式生成
+::
+
+  .. math::
+     f(V_{in}, S_{low}, S_{high}, H) =
+     \begin{cases}
+           1 & V_{in} \le S_{low} - H\\
+           0 & V_{in} \ge S_{high} + H\\
+     \end{cases}
+     :label: equation_9_3
+
+.. math::
+   f(V_{in}, S_{low}, S_{high}, H) =
+   \begin{cases}
+         1 & V_{in} \le S_{low} - H\\
+         0 & V_{in} \ge S_{high} + H\\
+   \end{cases}
+   :label: equation_9_3
+
+
+注释
+============
+::
+
+  .. 注释
+
+  ..
+     缩进内容也是注释
+
+.. 注释
+
+..
+   缩进内容也是注释
+
+
+
+::
+
+  .. seealso::
+
+     Module :py:mod:`zipfile`
+        标准模块 :py:mod:`zipfile` 的文档.
+
+     `GNU tar manual, Basic Tar Format <http://link>`_
+        归档文件的文档, 包含 GNU tar 扩展.
+
+  .. productionlist::
+     try_stmt: try1_stmt | try2_stmt
+     try1_stmt: "try" ":" `suite`
+              : ("except" [`expression` ["," `target`]] ":" `suite`)+
+              : ["else" ":" `suite`]
+              : ["finally" ":" `suite`]
+     try2_stmt: "try" ":" `suite`
+              : "finally" ":" `suite`
+
+.. seealso::
+
+   Module :py:mod:`zipfile`
+      标准模块 :py:mod:`zipfile` 的文档.
+
+   `GNU tar manual, Basic Tar Format <http://link>`_
+      归档文件的文档, 包含 GNU tar 扩展.
+
+.. productionlist::
+   try_stmt: try1_stmt | try2_stmt
+   try1_stmt: "try" ":" `suite`
+            : ("except" [`expression` ["," `target`]] ":" `suite`)+
+            : ["else" ":" `suite`]
+            : ["finally" ":" `suite`]
+   try2_stmt: "try" ":" `suite`
+            : "finally" ":" `suite`
+
+
+----------------
+
+
+
+
+文档结尾
+============
+::
+
+  .. centered:: LICENSE AGREEMENT
+
+  version: |version|
+
+  release: |release|
+
+  time: |today|
+
+.. centered:: LICENSE AGREEMENT
+
+version: |version|
+
+release: |release|
+
+time: |today|
+
+-----------------------------------------------------------------------
+
+
+本文参考：
+
+* `reStructuredText简明教程 <http://jwch.sdut.edu.cn/book/rst.html#rst-tutorial>`_
+* `附录：轻量级标记语言 <http://www.worldhello.net/gotgithub/appendix/markups.html>`_
+
+
+
+

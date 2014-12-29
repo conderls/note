@@ -1,0 +1,115 @@
+c & c++
+==========================
+printf("%d,%d,%d,%d",i++,++i,i++,i++)
+---------------------------------------
+
+.. code-block:: c
+
+   int i=5;
+   printf("%d,%d,%d,%d",i++,++i,i++,i++);
+
+下面给出几个编译器编译运行得到的结果::
+
+  gcc:8,9,6,5(加-Wall选项得到warning:operation on ''i'' may be undefined
+  icc:5,7,7,8
+  clang:5,7,7,8 （warning: multiple unsequenced ）modifications
+  opencc: 5,9,7,8 (加-Wall编译选项也得到warning)
+
+原因在于：在C/C++标准中，函数参数的运算顺序是没有特殊定义的，而是有编译器自己设定。
+因此，不要纠结这种问题，而且编程中也应尽量避免这种情况的出现，即不要在一表达式（如：i=(i++)+(++i))或函数中出现多个这种计算。
+
+可以查看C sequence points相关内容:http://msdn.microsoft.com/en-us/library/azk8zbxd.aspx
+
+字符串数组越界(gets、fgets）
+----------------------------------
+编译时，不会检查是否越界，而putchar()或%s输出时只在遇到''\0''时停止，当字符串数组越界时，越界较短情况下，可能不会报错，而且输出完整的值，但如果越界很多，则会报错，而越界后继续访问内存，很可能会造成严重后果。所以，需要人为控制内存溢出问题，给字符串用memset()赋初值，人为给字符串终止符''\0''留个位置，注意下标等等。
+
+.. code-block:: c
+
+   char b[] = {'i', 's'}; // 假设忘记添加结束符\0
+   printf("字符串b：%s", b); // 输出字符串b，很可能出现不可知的错误。
+   char p[][3]={"abc","def"};
+   printf("%s",p[0]);   // 将输出abcdef
+
+使用gets()时，可以无限读取，如果定义的数组空间较小，容易发生溢出，多出来的字符会覆盖堆栈中原先的内容，因此少用或不用gets()函数，而改用fgets()。
+
+getchar()
+-------------------------
+程序运行到a=getchar()函数时，等待键盘输入，（行缓冲模式下）输入一串字符后回车，将字符串（含回车）送入缓存区并将第一个字符返回给变量a,“删除”第一个字符（实际是指针后移一位），如果缓存区内已有字符，则getchar()自动从缓冲区获得一个字符，而无需键盘输入。例:
+
+.. code-block:: c
+   :linenos:
+
+   int main()
+   {
+      char a,b;
+      a=getchar();
+      b=getchar();
+      prinf("%c%c",a,b);
+      return 0;
+   }
+
+键盘输入：
+
+   c回车
+
+则缓冲区内字符为："c\\n";
+
+因此: a='c',b='\\n';
+
+二维数组作为函数参数
+-------------------------
+
+.. code-block:: c
+
+   int a[m][n];   // m,n已知
+   a[i][j]地址为：
+   a+i*n+j;       // 因此对于多维数组，必须给定二维或更高维的大小。
+
+传递二维数组的几种常见方法：
+
+- 形参给出第二维的长度
+
+  .. code-block:: c
+
+     void func(char str[][5]);
+     char str[][5]={"abc","def","ghi"};
+     func(str);
+
+- 形参为指向数组的指针
+
+  .. code-block:: c
+
+     void func(char (*str)[5]);   // 注意(*str)前后括号
+     // [5]表示每个字符串最多5个字符，
+     // 由于字符串最后一个应为'\0'，因此实际上最好只存4个字符，否则用printf输出有问题。
+     char str[][5]={"abc","def","ghi"};
+     func(str);
+
+- 形参为指针数组
+
+  .. code-block:: c
+
+     void func(char * str[5]);
+     char * str[5]={"abc","def","ghijklm"};  // str为5个指向字符串的指针
+     func(str);
+
+- 形参为指针的指针
+
+  .. code-block:: c
+
+     void func(char **str);
+     char str[][5]={"abc","def","ghi"};
+     p[0]=&str[0][0];
+     p[1]=str[1];
+     p[2]=str[2];
+     func(p);
+     // 或
+     char *str[5] // 声明
+
+- c++里使用二维向量
+
+  .. code-block:: c++
+
+     vector<vector<int>> array[5]
+
