@@ -1,0 +1,797 @@
+.. Ubuntu documentation master file, created by
+   sphinx-quickstart on Wed Apr 23 17:08:09 2014.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Linux Doc (UBUNTU distribution)
+==================================
+
+.. toctree::
+   :maxdepth: 1
+
+   linux_commands
+
+:author: conderls_
+
+.. _conderls: conderls@sina.com
+
+
+常用软件
+-----------------
+
+:System setting:
+
+    .. hlist::
+       :columns: 4
+
+       * byobu
+       * filezilla
+       * stardict
+       * apt-file
+       * convmv
+
+:Multimedia:
+
+    .. hlist::
+       :columns: 4
+
+       * smplayer
+       * gimp
+       * sweep
+       * audacity
+       * librecad
+       * mypaint
+       * inkscape
+       * blender 3D
+       * imagemagic
+
+:Doc:
+
+    .. hlist::
+       :columns: 4
+
+       * vim
+       * texlive
+       * chmsee
+       * xchem
+
+:Programming:
+
+    .. hlist::
+       :columns: 4
+
+       * codeblocks
+       * mpich2
+
+    :compiler:
+
+    .. hlist::
+       :columns: 3
+
+       * g++
+       * gcc
+       * gfortran
+
+    :Mathtools:
+
+    .. hlist::
+       :columns: 3
+
+       - Octave
+       - Maxima
+       - matlab-support
+
+    :python:
+
+    .. hlist::
+       :columns: 3
+
+       - spyder
+       - anaconda
+       - ranger
+       - sphinx
+       - python-wxgtk2.8
+       - python-wxtools
+       - wx2.8-i18n
+
+
+编译 & 安装
+--------------------------
+
+apt-file
+++++++++++++++++++++++
+
+  安装apt-file并更新缓存：
+  ::
+
+    sudo apt-get install apt-file
+    sudo apt-file update
+
+  现在你可以使用apt-file搜索缺失的文件了，比如编译过程中提示缺少XTest.h, 找出所在包，并安装。
+  ::
+
+    apt-file search XTest.h
+
+
+convmv
+++++++++++++++++++++++++++
+
+  convmv能帮助我们很容易地对一个文件，一个目录下所有文件进行编码转换，比如gbk转为utf8等。
+  语法:
+  ::
+
+    convmv [options] FILE(S) ... DIRECTORY(S)
+
+  主要选项：
+   |  -f ENCODING
+   |       指定目前文件名的编码，如-f gbk
+   |  -t ENCODING
+   |       指定将要转换成的编码，如-f utf-8
+   |  -r
+   |       递归转换目录下所有文件名
+   |  --list
+   |       列出所有支持的编码
+   |  --notest
+   |       默认是只打印转换后的效果，加这个选项才真正执行转换操作。
+
+  更多选项请man convmv。
+
+  例子：
+    递归转换centos目录下的目前文件名编码gbk为utf-8:
+    ::
+
+      convmv -f gbk -t utf-8 --notest -r  centos
+
+flash player
+++++++++++++++++++++++++
+
+  .. code-block:: bash
+
+   cp libflashplayer.so ~/.mozilla/plugins
+   cp libflashplayer.so  /opt/google/chrome/plugins
+   #或者
+   sudo apt-get install flashplugin-installer
+
+
+grub
+++++++++++++++++++++++++++++
+
+1. 更改grub启动界面背景图片
+
+  .. code-block:: bash
+
+    sudo gedit /etc/grub.d/05_debian_theme
+
+  找到：
+
+  .. code-block:: bash
+
+    if set_background_image "/usr/share/images/desktop-base/desktop-grub.png"; then
+        exit 0
+    fi
+
+  将图片地址修改，一般将想要替换的壁纸保存为/boot/grub/\**.jpg(JPG, jpeg, JPEG, png, PNG, tga, TGA), 保存、退出，并更新:
+
+  .. code-block:: bash
+
+    sudo update-grub
+
+2. 修改启动项(grub2引导的系统)
+
+  a、在Ubuntu终端下输入：
+    .. code-block:: sh
+
+      sudo mv /etc/grub.d/30_os-prober /etc/grub.d/08_os-prober
+      sudo update-grub
+
+    该命令是将etc文件夹下的grub.d文件夹下的30\_os-prober文件改名为08_os-prober(08可以改为06~09都可以）。
+
+    Ubuntu的启动项相关文件名为“10\_”这样就可以将Windows的启动项放在Ubuntu前面，即启动项列表的第一个。
+
+    由于引导程序默认 启动第一个启动项，所以这样就可以先启动Windows了。改完后更新grub
+    ::
+
+      sudo update-grub
+
+  b、在Ubuntu终端下输入:
+    ::
+
+      sudo gedit /etc/default/grub
+
+    “GRUB_DEFAULT=0”
+
+    比如Win7在启动项列表中为第5项，则将0改为4。就是win7在启动项列表中的项数减1。
+
+    “GRUB_TIMEOUT=所要等待的秒数”
+
+    修改完后更新grub，这种方法在更新内核后可能失效。
+
+
+matlab
+++++++++++++++++++++++
+
+1. 安装matlab-support，这样就可以在unity中找到matlab图标。
+
+2. 不启动界面运行
+
+  .. code-block:: bash
+
+    matlab -nodisplay
+    matlab -nojvm -nosplash
+
+    #matlab程序也可以在命令行里直接运行，只需要使用 -r 选项。
+    #可用以下三种命令运行当前目录下的example.m
+
+    matlab -nodesktop -nosplash -r example
+    matlab -nojvm -nosplash -r example
+    matlab -nodisplay -r example
+
+  可以将如下命令加到~/.bashrc文件
+  ::
+
+    alias mrun='matlab -nodesktop -nosplash -r'
+
+  这样下次（或者执行source ~/.bashrc）之后就可以直接用下列命令来运行matlab文件。
+  ::
+
+    mrun example
+
+  使用如下命令运行（也可写成脚本/usr/bin/matlab, 并chmod +x matlab）
+  ::
+
+    /usr/local/MATLAB/R2010b/bin/matlab -desktop
+
+  则可终端运行：
+
+  .. code-block:: bash
+
+    matlab #这样启动的话，该终端无法再输入其他命令，可改用如下命令：
+    nohup matlab &
+
+  如果使用 -nodisplay -r 选项运行，当程序中有figure()命令时会出错，可以使用如下选项抑制图形的显示：
+
+  .. code-block:: bash
+
+    figure('visible','off');
+
+    #并使用如下命令将图形输出到文件：
+
+    print('-deps','example.eps');
+    #或者
+    hgsave('example.fig');
+
+3. 解决lib.so.6：not found
+
+  For 64 bit：
+  ::
+
+    sudo ln -s /lib/x86_64-linux-gnu/libc-2.13.so /lib64/libc.so.6
+
+  For 32 bit：
+  ::
+
+    sudo ln -s /lib/i386-linux-gnu/libc-2.13.so /lib/libc.so.6
+
+
+Mendeley
+++++++++++++++++++++++++
+
+1. Uninstall the actual program. If you used the Ubuntu package you can do this with 'Software Center' or 'apt-get remove mendeleydesktop' from a terminal. If you used the 'generic' package this just involves deleting the folder where you unpacked the files.
+
+2. If you don't want your local Mendeley data any more, you can remove ~/.local/share/mendeleydesktop and the Mendeley Ltd. directory from ~/.local/share/data. There are also a few config files under ~/.config (all with 'Mendeley' in the name).
+
+
+
+Octave
++++++++++++++++++
+
+1. 修改默认编辑器
+
+  octave默认编辑器为Emacs，将其改为vim或gedit
+
+  .. code-block:: bash
+
+     touch ~/.octaverc
+
+  在该文件中加入下列命令：
+
+  .. code-block:: bash
+
+    EDITOR("vim %s")                          #使用gvim作为编辑器
+    EDITOR("gnome-terminal -e \"vim %s\"")    #在gnome-terminal中打开vim作为编辑器
+    #或
+    EDITOR("gedit %s")                        #使用gedit作为编辑器
+
+
+pack & unpack
+++++++++++++++++++++++++++++++
+
+  .. code-block:: bash
+
+    sudo apt-get install p7zip p7zip-full p7zip-rar rar unrar
+    sudo ln -fs /usr/bin/rar /usr/bin/unrar
+
+    #这样，以后只要在命令行输入unrar，就可以解压或者压缩文件了
+    #安装完成后，归档管理器也同时集成了rar组件。
+
+    sudo apt-get install unra  #一些压缩包解压后会中文乱码，用该命令
+
+stardict
++++++++++++++++++++++++++++
+
+  stardict离线词典安装：将下载的字典解压得到dic文件夹
+
+  .. code-block:: bash
+
+    chmod a+rx -R dic   #修改权限，否则程序无法读取字典
+    sudo mv dic /usr/share/stardict/
+
+
+sublime_text_2
++++++++++++++++++++++++++
+中文输入：
+
+  1. 使用小小输入法：
+
+    小小输入法新版本已经支持再Sublime Text 下输入中文
+    关于小小输入法的安装以及简介：
+
+    http://blog.ubuntusoft.com/small-input.html
+    http://forum.ubuntu.org.cn/viewtopic.php?t=226677
+
+  2. 通过打补丁的方式，让Sublime Text 2 支持Fcitx 输入法
+
+    首先我们需要通过PPA 安装ST2（非官方下载的免安装包）：
+
+    .. code-block:: sh
+
+      sudo add-apt-repository ppa:webupd8team/sublime-text-2
+      sudo apt-get update
+      sudo apt-get install sublime-text
+
+    然后打补丁：
+    将下面代码复制下来，并保存为 :download:`sublime-imfix.c <sublime-imfix.c>` （存放于/home/username，即你的主目录）：
+
+    .. code-block:: c
+
+      /*
+      sublime-imfix.c
+      Use LD_PRELOAD to interpose some function to fix sublime input method support for linux.
+      By Cjacker Huang <jianzhong.huang at i-soft.com.cn>
+
+      gcc -shared -o libsublime-imfix.so sublime_imfix.c  `pkg-config --libs --cflags gtk+-2.0` -fPIC
+      LD_PRELOAD=./libsublime-imfix.so sublime_text
+      */
+      #include <gtk/gtk.h>
+      #include <gdk/gdkx.h>
+      typedef GdkSegment GdkRegionBox;
+
+      struct _GdkRegion
+      {
+        long size;
+        long numRects;
+        GdkRegionBox *rects;
+        GdkRegionBox extents;
+      };
+
+      GtkIMContext *local_context;
+
+      void
+      gdk_region_get_clipbox (const GdkRegion *region,
+                  GdkRectangle    *rectangle)
+      {
+        g_return_if_fail (region != NULL);
+        g_return_if_fail (rectangle != NULL);
+
+        rectangle->x = region->extents.x1;
+        rectangle->y = region->extents.y1;
+        rectangle->width = region->extents.x2 - region->extents.x1;
+        rectangle->height = region->extents.y2 - region->extents.y1;
+        GdkRectangle rect;
+        rect.x = rectangle->x;
+        rect.y = rectangle->y;
+        rect.width = 0;
+        rect.height = rectangle->height;
+        //The caret width is 2;
+        //Maybe sometimes we will make a mistake, but for most of the time, it should be the caret.
+        if(rectangle->width == 2 && GTK_IS_IM_CONTEXT(local_context)) {
+              gtk_im_context_set_cursor_location(local_context, rectangle);
+        }
+      }
+
+      //this is needed, for example, if you input something in file dialog and return back the edit area
+      //context will lost, so here we set it again.
+
+      static GdkFilterReturn event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer im_context)
+      {
+          XEvent *xev = (XEvent *)xevent;
+          if(xev->type == KeyRelease && GTK_IS_IM_CONTEXT(im_context)) {
+             GdkWindow * win = g_object_get_data(G_OBJECT(im_context),"window");
+             if(GDK_IS_WINDOW(win))
+               gtk_im_context_set_client_window(im_context, win);
+          }
+          return GDK_FILTER_CONTINUE;
+      }
+
+      void gtk_im_context_set_client_window (GtkIMContext *context,
+                GdkWindow    *window)
+      {
+        GtkIMContextClass *klass;
+        g_return_if_fail (GTK_IS_IM_CONTEXT (context));
+        klass = GTK_IM_CONTEXT_GET_CLASS (context);
+        if (klass->set_client_window)
+          klass->set_client_window (context, window);
+
+        if(!GDK_IS_WINDOW (window))
+          return;
+        g_object_set_data(G_OBJECT(context),"window",window);
+        int width = gdk_window_get_width(window);
+        int height = gdk_window_get_height(window);
+        if(width != 0 && height !=0) {
+          gtk_im_context_focus_in(context);
+          local_context = context;
+        }
+        gdk_window_add_filter (window, event_filter, context);
+      }
+
+    安装编译时所需环境，并编译：
+
+    .. code-block:: sh
+
+      sudo apt-get install build-essential
+      sudo apt-get install libgtk2.0-dev
+
+      gcc -shared -o libsublime-imfix.so sublime_imfix.c  `pkg-config --libs --cflags gtk+-2.0` -fPIC
+
+    编译后会得到libsublime-imfix.so ，我建议你直接把libsublime-imfix.so 留在你的主目录即可。
+    然后修改ST2的启动配置：
+
+    .. code-block:: sh
+
+       sudo gedit /usr/share/applications/sublime-text-2.desktop
+
+    找到
+
+    .. code-block:: sh
+
+      Exec=/usr/bin/sublime-text-2 %F
+
+      #及
+      Exec=/usr/bin/sublime-text-2 --new-window
+
+    分别修改为：
+
+    .. code-block:: sh
+
+      Exec=bash -c 'LD_PRELOAD=/home/username/libsublime-imfix.so /usr/bin/sublime-text-2' %F
+      #及
+
+      Exec=bash -c 'LD_PRELOAD=/home/username/libsublime-imfix.so /usr/bin/sublime-text-2' --new-window
+
+:注意:
+
+  其中/home/username/libsublime-imfix.so 修改为你编译生成的libsublime-imfix.so 的所在路径。
+
+:注意:
+
+  新版本的ST2 的启动命令改为subl (上面教程中是旧版本的sublime-text-2)，因此修改的时候，把sublime-text-2 改为 subl,然后保存，重启ST2 即可。
+
+
+
+
+Terminal
+++++++++++++++++++++
+
+  右键中添加open in terminal选项
+
+  .. code-block:: bash
+
+    sudo apt-get install nautilus-open-terminal
+
+
+
+
+
+环境变量
+--------------------
+1. /etc/profile, /etc/bashrc, .bash_profile, .bashrc
+
+  */etc/profile*
+
+    其设定的变量可以作用于所有用户。此文件为系统的每个用户设置环境信息,当用户第一次登录时,该文件被执行. 并从/etc/profile.d目录的配置文件中搜集shell的设置。
+
+  */etc/bashrc*
+
+    为每一个运行bash shell的用户执行此文件.当bash shell被打开时,该文件被读取.Ubuntu没有此文件，与之对应的是/ect/bash.bashrc它也是全局（公有）的 bash执行时，不管是何种方式，都会读取此文件。
+
+
+  *~/.bash_profile*
+
+    是交互式、login 方式进入 bash 运行的 每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次! 默认情况下, 他设置一些环境变量,执行用户的.bashrc文件. Unbutu默认没有此文件，可新建。只有bash是以login形式执行时，才会读取此文件。通常该配置文件还会配置成去读取~/.bashrc。
+
+
+  *~/.bashrc*
+
+    是交互式 non-login 方式进入 bash 运行的。设定的变量(局部)只能继承/etc/profile中的变量,他们是"父子"关系. 该文件包含专用于你的bash shell的bash信息,当登录时以及每次打开新的shell时,该文件被读取. 当bash是以non-login形式执行时，读取此文件。若是以login形式执行，则不会读取此文件
+
+  *~/.profile*
+
+    若bash是以login方式执行时，读取~/.bash_profile，若它不存在.bash_login，若前两者不存在，读取~/.profile。 另外，图形模式登录时，此文件将被读取，即使存在~/.bash_profile和~/.bash_login。
+
+  *~/.bash_login*
+
+    若bash是以login方式执行时，读取~/.bash_profile，若它不存在.bash_login，若前两者不存在，读取~/.profile。
+
+  *~/.bash_logout*
+     当每次退出系统(退出bash shell)时,执行该文件.注销时，且是longin形式，此文件才会读取。也就是说，在文本模式注销时，此文件会被读取，图形模式注不会被读取。
+
+  通常二者设置大致相同，所以通常前者会调用后者。
+
+  下面是几个例子：
+
+  1. 图形模式登录时，顺序读取：/etc/profile和~/.profile
+  2. 图形模式登录后，打开终端时，顺序读取：/etc/bash.bashrc和~/.bashrc
+  3. 文本模式登录时，顺序读取：/etc/bash.bashrc，/etc/profile和~/.bash_profile
+  4. 从其它用户su到该用户，则分两种情况：
+
+    - 如果带-l参数（或-参数，--login参数），如：su -l username，则bash是lonin的，它将顺序读取以下配置文件：/etc/bash.bashrc，/etc/profile和~/.   bash_profile。
+    - 如果没有带-l参数，则bash是non-login的，它将顺序读取：/etc/bash.bashrc和~/.bashrc
+
+  5. 注销时，或退出su登录的用户，如果是longin方式，那么bash会读取：~/.bash_logout
+  6. 执行自定义的shell文件时，若使用“bash -l a.sh”的方式，则bash会读取行：/etc/profile和~/.bash_profile，若使用其它方式，如：bash a.sh， ./a.sh，sh a.sh（这个不属于bash shell），则不会读取上面的任何文件。
+  7. 上面的例子凡是读取到~/.bash_profile的，若该文件不存在，则读取~/.bash_login，若前两者不存在，读取~/.profile。
+
+2、 修改变量：
+
+  a. 在终端修改，但只对当前终端有效：
+
+    ::
+
+      export PATH=$PATH:/etc/apache/bin
+
+  b. 在 `/etc/profile` 中添加（注意：等号两边不能由空格），这种方法最好，除非手动强制修改，否则不会被改变
+  c. 在 `~/.bashrc` 中修改，只对当前用户管用。
+  d. 在 `~/.bashr_profile` 中修改，也只对当前用户有效。比如在root权限下操作，则对root用户有效。
+
+ :注意:
+
+  要使修改的变量生效，必须重新登录，或编辑结束后对所编辑的文件使用source命令：
+
+  ::
+
+    source filename
+
+
+双系统时间差
+--------------------
+
+1、Windows与Linux（Ubuntu）双系统时间不一致 (相差8小时) 的解决方法：
+
+  * Ubuntu下修改:(推荐)
+
+    Ubuntu中不使用UTC时间，而启用本地时间，需要修改 /etc/default/rcS ，修改动作如下：
+    # 注释掉原来的设定：UTC=yes
+    # 变更为下面的内容...
+    UTC=no
+
+  * windows下修改：
+
+    下中添加一项数据类型为REG_DWORD，名称为RealTimeIsUniversal，值设为1 的键值。
+    在 注册表项：HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\\
+    或者直接使用下如下批处理进行修改：
+
+    ::
+
+      @echo off
+      color 0a
+      Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d 1
+      echo.
+      echo 已让Windows识别存贮在主板CMOS内的时间为格林威治标准时间（GMT）,即系统根据CMOS时间和设置的时区来确定当前系统的时间。
+      echo.
+      pause
+
+
+输入密码后出现闪屏又回到登录界面
+------------------------------------------
+
+*原因*
+  手贱在自己账户下 命令行 `sudo startX`
+*结果*
+  只能访问 `guest session`
+*解决*
+  由于 `sudo startX` 操作后，将 `~/.Xauthority` 文件所有者改为了root，
+  因此只要tty命令行下登录用户，`sudo chown acount:acount ~/.Xauthority` 。
+  ctrl + alt + F7
+
+
+Linux制作U盘启动盘
+---------------------------
+
+* cat
+
+  使用方法： cat  镜像目录 > 设备（可以使用fdisk -l 查看）。
+
+  .. code-block:: sh
+
+    cat ubuntu-13.10-desktop-i386.iso >/dev/sdb1
+
+  :注意:
+
+    后面重定向的是设备而不是设备挂载后的目录，还有就是，使用 root 权限运行。
+
+
+* dd
+
+  使用方法： dd [选项]  (最好自己看一下 dd 的 manpage)。
+
+  :功能:
+
+    把指定的输入文件拷贝到指定的输出文件中，并且在拷贝过程中可以进行格式转换。
+    可以用该命令实现DOS下的diskcopy命令的作用。先用dd命令把软盘上的数据写成硬盘的一个寄存文件，
+    再把这个寄存文件写入第二张软盘上，完成diskcopy的功能。
+    需要注意的是，应该将硬盘上的寄存文件用rm命令删除掉。系统默认使用标准输入文件和标准输出文件。
+
+
+
+  那么，我们可以看到 dd 主要的功能就是拷贝文件，并且在拷贝时可以格式转换，所以 dd 也是平时使用比较多的进行制作 U 盘（或者 cdrom）的工具。我看道网上说甚至可以使用 dd 将 CD 上的文件拷贝到本地并放在一个镜像中（我们可以使用这个来实现将 CD/DVD上的系统拷贝到本地作为镜像文件）。
+
+  .. code-block:: sh
+
+    #使用 dd 制作 U 盘启动盘：
+    dd if=ubuntu-13.10-desktop-i386.iso  of=/dev/sdb1 bs=4M
+
+  我们可以看到，使用 dd 只是和使用 cat 带入参数方法不一样，镜像目录使用 if= 来指定，U盘设备的地址使用 of= 来指定，最后的 bs=4M 上面也可以看到是指定一次写入字节数
+
+  .. code-block:: sh
+
+    #使用 dd 制作 CD/DVD 系统盘：
+    dd if=ubuntu-13.10-desktop-i386.iso  of=/dev/cdrom bs=4M
+
+    #使用 dd 制作镜像：
+    dd if=/dev/cdrom of=/home/username/cd.iso  bs=4M
+
+  :注:
+     * bs 带的参数是一次写入字节数，可以自己替换更高的数来得到更高的速度.但是真正使用时，速度的上限还是限于硬件的读写速度（比如说，USB2.0 的U盘，你带入参数 bs=16M，但是真正得到的读写速度仍然是3M～4M的样子）
+     * 使用 root 权限运行
+
+
+乱码
+--------
+
+1. Rhythmbox
+
+  编辑/etc/profile:
+  添加并保存：
+
+  ::
+
+    export GST_ID3_TAG_ENCODING=GBK:UTF-8:GB18030
+    export GST_ID3V2_TAG_ENCODING=GBK:UTF-8:GB18030
+
+
+
+
+
+2. gedit
+
+  gedit打开GB18030/GBK/GB2312 等类型的中文编码文本文件时，将会出现乱码。
+
+  *原因*
+
+    gedit 使用一个编码匹配列表，只有在这个列表中的编码才会进行匹配，不在这个列表中的编码将显示为乱码。
+
+  *解决*
+
+    要做的就是将GB18030 加入这个匹配列表
+
+    .. code-block:: sh
+
+      gsettings set org.gnome.gedit.preferences.encodings auto-detected "['UTF-8','GB18030','GB2312','GBK','BIG5','CURRENT','UTF-16']"
+
+    若出现如下错误：
+
+    ::
+
+      `** (gedit:3525): WARNING **:` Could not load Gedit repository: Typelib file for namespace 'GtkSource', version '3.0' not found
+
+    则：
+
+    .. code-block:: sh
+
+      sudo apt-get install gir1.2-gtksource-3.0
+
+3. vim
+
+  在 `~/.vimrc` 中添加：
+
+  ::
+
+    set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
+
+  这样，就可以让vim自动识别文件编码（可以自动识别UTF-8或者GBK编码的文件），其实就是依照 fileencodings提供的编码列表尝试，如果没有找到合适的编码，就用latin-1(ASCII)编码打开。
+
+查看文件编码及修改
+--------------------------
+1. 查看文件编码：
+
+  a. vim中查看
+
+    ::
+
+      :set fileencoding
+
+    即可显示。
+
+  b. enca命令查看
+
+    ::
+
+      enca filename
+
+      enca -L zh_CN filename
+
+    :注意:
+
+      enca对某些GBK编码的文件识别的不是很好，识别时会出现： **Unrecognized encoding**
+
+  c. file命令
+  ::
+
+    file filename
+
+
+2. 文件内容编码转换：
+
+  a. vim中直接转换
+  ::
+
+    :set fileencoding=utf-8
+
+  b. enconv转换
+  ::
+
+    #将GBK编码文件转换成UTF-8编码
+    enconv -L zh_CN -x UTF-8 filename
+
+  c. iconv转换
+  ::
+
+    iconv -f encoding -t encoding inputfile
+
+    #例如：将GBK编码文件转换为UTF-8编码
+    iconv -f GBK -t UTF-8 file1 -o file2
+    #或
+    iconv -f GBK -t UTF-8 file1 >> file2
+
+  d. enca命令
+  ::
+
+    enca -L 当前语言 -x 目标编码 文件名
+    #若不想覆盖原文件
+    enca -L zh_CN -x UTF-8 < file1 > file2
+
+3、文件名编码转换：
+
+  a. convmv命令
+  ::
+
+    convmv -f GBK -t UTF-8 *.mp3
+    #该命令不会真正转换，要输出则须加参数--notest
+    convmv -f GBK -t UTF-8 --notest *.mp3
+
+    #-r参数表递归转换当前目录下的所有子目录
+
+
+
+
+
+
+
+
+.. Indices and tables
+.. ==================
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
+

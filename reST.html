@@ -1,0 +1,1277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>reStructuredText Manual &mdash; myhome 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="myhome 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Linux Doc (UBUNTU distribution)" href="software.html" />
+    <link rel="prev" title="python" href="python.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="software.html" title="Linux Doc (UBUNTU distribution)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="python"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">myhome 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="restructuredtext-manual">
+<h1>reStructuredText Manual<a class="headerlink" href="#restructuredtext-manual" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>.. toctree::
+
+   :maxdepth: 2
+   :numbered:            使各文档自动编号
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>文档主标题
+===========
+
+二级标题
+------------
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h2>文档主标题<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>二级标题<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>.. note::
+
+   - 下划线长度应大于文字长度
+   - 标题级别和下划线一般无对应，文档中保持一致即可。
+   - 标题级别一般按以下次序:
+
+     * ``#`` with overline, for parts
+     * ``*`` with overline, for chapters
+     * ``=``, for sections
+     * ``-``, for subsections
+     * ``^``, for subsubsections
+     * ``&quot;``, for paragraphs
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>下划线长度应大于文字长度</li>
+<li>标题级别和下划线一般无对应，文档中保持一致即可。</li>
+<li>标题级别一般按以下次序:<ul>
+<li><tt class="docutils literal"><span class="pre">#</span></tt> with overline, for parts</li>
+<li><tt class="docutils literal"><span class="pre">*</span></tt> with overline, for chapters</li>
+<li><tt class="docutils literal"><span class="pre">=</span></tt>, for sections</li>
+<li><tt class="docutils literal"><span class="pre">-</span></tt>, for subsections</li>
+<li><tt class="docutils literal"><span class="pre">^</span></tt>, for subsubsections</li>
+<li><tt class="docutils literal"><span class="pre">&quot;</span></tt>, for paragraphs</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="sphinx">
+<h2>Sphinx工程的目录结构<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>├── Makefile
+├── make.bat
+└── source
+    ├── conf.py         &lt;-- 配置文件，按下面修改
+    ├── _templates      &lt;-- 模板文件，不需要改动
+    ├── _themes         &lt;-- 样式文件，不需要改动
+    ├── index.rst       &lt;-- 文档入口，根据章节修改
+    ├── *.rst           &lt;-- 文档章节，请删除
+    └── images          &lt;-- 静态资源，根据引用路径取目录名，请删除此目录
+        └── *.png
+</pre></div>
+</div>
+<div class="section" id="id3">
+<h3>模板修改<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>（参见：<a class="reference external" href="http://sphinx-doc.org/theming.html">http://sphinx-doc.org/theming.html</a>）</p>
+<p>修改文件 <cite>conf.py</cite> 中 <cite>html_theme = &#8216;default&#8217;</cite> 选项（builtin themes）：</p>
+<ul class="simple">
+<li>default</li>
+<li>sphinxdoc</li>
+<li>nature</li>
+<li>pyramid</li>
+<li>haiku</li>
+<li>traditional</li>
+<li>scrolls</li>
+<li>agogo</li>
+</ul>
+<p>固定边栏：
+html_theme_options = {&#8220;stickysidebar&#8221;:&#8221;True&#8221;}</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>段落<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3>空行分段<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>第一段内容
+
+第二段内容和第一段之间有一空行
+
+第一段内容
+
+第二段内容和第一段之间有一空行
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>自动续行<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>一个回车部分段，
+本行续上行
+</pre></div>
+</div>
+<p>一个回车部分段，
+本行续上行</p>
+</div>
+<div class="section" id="id7">
+<h3>不留白续行<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>行尾转移字符\
+续行之间不留白。
+</pre></div>
+</div>
+<p>行尾转移字符续行之间不留白。</p>
+</div>
+<div class="section" id="id8">
+<h3>插入换行<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>| 保持现有格式
+| 不换行(注意符号``|``之后有空格)
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">保持现有格式</div>
+<div class="line">不换行(注意符号``|``之后有空格)</div>
+</div>
+<p><strong>下面的方法有点问题</strong></p>
+<div class="highlight-python"><div class="highlight"><pre>.. role:: raw-html(raw)
+   :format: html
+
+   用新定义的role插入换行，
+   :raw-html:`&lt;br /&gt;`
+   本行不续行
+</pre></div>
+</div>
+<p>用新定义的role插入换行，
+raw-html:<cite>&lt;br /&gt;</cite>
+本行不续行</p>
+</div>
+<div class="section" id="id9">
+<h3>段落缩进<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>邮件体段落缩进：
+
+  第一级段落缩进
+
+    第二级段落缩进
+
+  返回第一级段落缩进
+</pre></div>
+</div>
+<p>邮件体段落缩进：</p>
+<blockquote>
+<div><p>第一级段落缩进</p>
+<blockquote>
+<div>第二级段落缩进</div></blockquote>
+<p>返回第一级段落缩进</p>
+</div></blockquote>
+<p>即相同缩进量的段落对齐，同python段落缩进模式。</p>
+<div class="highlight-python"><div class="highlight"><pre>| 这些行
+| 在源文件里
+| 被分隔的一模一样.
+
+
+格言::
+
+  - 路漫漫其修远兮
+  - 吾将上下而求索
+
+有空白 ::
+
+  路漫漫其修远兮
+  吾将上下而求索
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">这些行</div>
+<div class="line">在源文件里</div>
+<div class="line">被分隔的一模一样.</div>
+</div>
+<p>格言:</p>
+<div class="highlight-python"><div class="highlight"><pre>- 路漫漫其修远兮
+- 吾将上下而求索
+</pre></div>
+</div>
+<p>有空白</p>
+<div class="highlight-python"><div class="highlight"><pre>路漫漫其修远兮
+吾将上下而求索
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>代码块<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>双冒号后为缩进的代码块：
+::
+
+  $ printf &quot;Hello, World.\n&quot;
+
+声明语言类型实现语法高亮模式(如：C++)
+
+.. code-block:: c++
+  :linenos:
+
+  #include &lt;iostream&gt;
+  using namespace std;
+
+  int main()
+  {
+    cout&lt;&lt;&quot;Hello World!&quot;&lt;&lt;endl;
+    return 0;
+  }
+</pre></div>
+</div>
+<p>双冒号后为缩进的代码块：</p>
+<div class="highlight-python"><div class="highlight"><pre>$ printf &quot;Hello, World.\n&quot;
+</pre></div>
+</div>
+<p>声明语言类型实现语法高亮模式(如：C++)</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Hello World!&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>外部包含：</p>
+<div class="highlight-python"><div class="highlight"><pre>.. literalinclude:: cpptest.cpp
+   :language: c++
+</pre></div>
+</div>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Hello World!&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>   
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>注意上述代码中的空行，双冒号（或声明语言行后），空一行，代码块须向右缩进。</p>
+<table class="last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">linenos:</th><td class="field-body">表示显示行号</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>列表<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id12">
+<h3>无序列表<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>- 条目
+- 条目
+
+  - 条目
+  - 条目
+
+    - 条目
+
+- 条目
+</pre></div>
+</div>
+<ul>
+<li><p class="first">条目</p>
+</li>
+<li><p class="first">条目</p>
+<ul>
+<li><p class="first">条目</p>
+</li>
+<li><p class="first">条目</p>
+<blockquote>
+<div><ul class="simple">
+<li>条目</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">条目</p>
+</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>* 星号、减号、加号开始列表。
+
+  - 列表层级与缩进有关
+
+    × 和具体符号无关
+
+* 返回到第一级列表
+</pre></div>
+</div>
+<ul>
+<li><p class="first">星号、减号、加号开始列表。</p>
+<ul>
+<li><p class="first">列表层级与缩进有关</p>
+<p>× 和具体符号无关</p>
+</li>
+</ul>
+</li>
+<li><p class="first">返回到第一级列表</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id13">
+<h3>有序列表<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>1. 数字和点是一种标号方式。
+
+  A. 大写字母编号。
+
+     a. 小写字母编号。
+
+2. 继续第一级标号。
+
+  (I) 大写字母编号。
+
+    i) 小写字母编号。
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>数字和点是一种标号方式。</li>
+</ol>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li>大写字母编号。<ol class="loweralpha">
+<li>小写字母编号。</li>
+</ol>
+</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>继续第一级标号。</li>
+</ol>
+<blockquote>
+<div><ol class="upperroman simple">
+<li>大写字母编号。</li>
+</ol>
+<blockquote>
+<div><ol class="lowerroman simple">
+<li>小写字母编号。</li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="id14">
+<h3>自动编号<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>3. 第三条
+
+#. 第四条
+
+7. 重新设定序号
+
+#. 继续
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>第三条</li>
+<li>第四条</li>
+</ol>
+<ol class="arabic simple" start="7">
+<li>重新设定序号</li>
+<li>继续</li>
+</ol>
+</div>
+<div class="section" id="id15">
+<h3>列表中的续行、段落和代码块<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>1. 列表项可以折行，
+   对齐则自动续行。
+
+2. 列表中多个段落
+
+   空行开始新段落，
+   新段落要和列表项内容对齐。
+
+3. 列表中代码块注意对齐：
+   ::
+
+     $ printf &quot;Hello World. \n&quot;
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p class="first">列表项可以折行，
+对齐则自动续行。</p>
+</li>
+<li><p class="first">列表中多个段落</p>
+<p>空行开始新段落，
+新段落要和列表项内容对齐。</p>
+</li>
+<li><p class="first">列表中代码块注意对齐：</p>
+<div class="highlight-python"><div class="highlight"><pre>$ printf &quot;Hello World. \n&quot;
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id16">
+<h2>定义<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>git
+  Simple and beautiful.
+
+hg
+  Another DVCS.
+
+subersion
+  VCS with many constrains.
+
+  Why not Git?
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>git</dt>
+<dd>Simple and beautiful.</dd>
+<dt>hg</dt>
+<dd>Another DVCS.</dd>
+<dt>subersion</dt>
+<dd><p class="first">VCS with many constrains.</p>
+<p class="last">Why not Git?</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id17">
+<h2>分割线<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<p>四条或以上短线显示为分割线</p>
+<div class="highlight-python"><div class="highlight"><pre>----
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id18">
+<h2>字体<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>这是 **粗体** 符号前后均需用空格隔开
+
+这是 *斜体*
+
+这是 ``代码引用`` 可以输入 ``++ --`` ，而非代码引用效果为： ++ --
+
+这是不留白的\ **粗体**\ 和\ *斜体*\的效果。
+</pre></div>
+</div>
+<p>这是 <strong>粗体</strong> 符号前后均需用空格隔开</p>
+<p>这是 <em>斜体</em></p>
+<p>这是 <tt class="docutils literal"><span class="pre">代码引用</span></tt> 可以输入 <tt class="docutils literal"><span class="pre">++</span> <span class="pre">--</span></tt> ，而非代码引用效果为： ++ &#8211;</p>
+<p>这是不留白的<strong>粗体</strong>和<em>斜体</em>的效果。</p>
+<div class="highlight-python"><div class="highlight"><pre>.. role:: strike
+   :class: strike
+
+:strike:`删除线` 效果
+
+不留白的\ :strike:`删除线`\ 效果
+
+.. role:: ul
+   :class: underline
+
+:ul:`下划线` 效果
+
+不留白的\ :ul:`下划线`\ 效果
+</pre></div>
+</div>
+<p><span class="strike">删除线</span> 效果</p>
+<p>不留白的<span class="strike">删除线</span>效果</p>
+<p><span class="underline">下划线</span> 效果</p>
+<p>不留白的<span class="underline">下划线</span>效果</p>
+<div class="highlight-python"><div class="highlight"><pre>上标、下标
+-----------
+
+- Water: H\ :sub:`2`\ O
+- E=mc\ :sup:`2`
+
+等宽字体
+-----------
+
+两个连续反引号嵌入代码，如：``git status``。
+
+引言
+-------
+
+`Got Github` by me
+
+清除标记空白
+------------
+
+标记符号前后空白用\ **反斜线**\ 消除
+</pre></div>
+</div>
+<div class="section" id="id19">
+<h3>上标、下标<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Water: H<sub>2</sub>O</li>
+<li>E=mc<sup>2</sup></li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h3>等宽字体<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<p>两个连续反引号嵌入代码，如：<tt class="docutils literal"><span class="pre">git</span> <span class="pre">status</span></tt>。</p>
+</div>
+<div class="section" id="id21">
+<h3>引言<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<p><cite>Got Github</cite> by me</p>
+</div>
+<div class="section" id="id22">
+<h3>清除标记空白<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<p>标记符号前后空白用<strong>反斜线</strong>消除</p>
+</div>
+</div>
+<div class="section" id="id23">
+<h2>链接<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>URL自动连接
+-----------
+
+- 北京大学 http://www.pku.edu.cn
+- 未名bbs http://bbs.pku.edu.cn
+- 邮箱 conderls@sina.com
+
+文字连接
+------------
+
+- 访问 `北京大学 &lt;http://www.pku.edu.cn&gt;`_ 。
+- 上面已经定义，直接引用 北京大学_ 链接。
+- 链接地址在后面说明，如： 未名bbs_ 。
+- 反引号括起多个单词链接，如： `pku homepage`_ 。
+
+.. _未名bbs: http://bbs.pku.edu.cn
+.. _pku homepage: http://www.pku.edu.cn
+</pre></div>
+</div>
+<div class="section" id="url">
+<h3>URL自动连接<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>北京大学 <a class="reference external" href="http://www.pku.edu.cn">http://www.pku.edu.cn</a></li>
+<li>未名bbs <a class="reference external" href="http://bbs.pku.edu.cn">http://bbs.pku.edu.cn</a></li>
+</ul>
+</div>
+<div class="section" id="id24">
+<h3>文字连接：<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>访问 <a class="reference external" href="http://www.pku.edu.cn">北京大学</a> 。</li>
+<li>上面已经定义，直接引用 <a class="reference external" href="http://www.pku.edu.cn">北京大学</a> 链接。</li>
+<li>链接地址在后面说明，如： <a class="reference external" href="http://bbs.pku.edu.cn">未名bbs</a> 。</li>
+<li>反引号括起多个单词链接，如： <a class="reference external" href="http://www.pku.edu.cn">pku homepage</a> 。</li>
+</ul>
+</div>
+<div class="section" id="id26">
+<h3>内部跳转<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>.. _fig1:
+
+.. figure:: _static/pic/more.png
+
+  内部跳转示例
+
+- 通过 fig1_ 跳转
+- 通过 `点击这里 &lt;#fig1&gt;`_ 跳转
+- 参见 :ref:`fig1`\ 。
+</pre></div>
+</div>
+<div class="figure" id="fig1">
+<img alt="_images/more.png" src="_images/more.png" />
+<p class="caption">内部跳转示例</p>
+</div>
+<ul class="simple">
+<li>通过 <a class="reference internal" href="#fig1">fig1</a> 跳转</li>
+<li>通过 <a class="reference external" href="#fig1">点击这里</a> 跳转</li>
+<li>参见 <a class="reference internal" href="#fig1"><em>内部跳转示例</em></a>。</li>
+</ul>
+</div>
+<div class="section" id="id28">
+<h3>章节之间跳转<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>各个章节的首页一般是 index.rst
+头一行，习惯性加个声明：
+.. _chapter1index:
+
+那么，在其它任意文本中可随时引用：
+:ref:`首页 &lt;homeindex&gt;`指向首页的链接。
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">那么，在其它任意文本中可随时引用：</div>
+<div class="line"><a class="reference internal" href="index.html#homeindex"><em>首页</em></a> 指向首页的链接。</div>
+</div>
+<p>对于中文标题有可能产生的锚点只是#id56形式，没有正式链接跳转。需要创建形如以下形式的锚点</p>
+<div class="highlight-python"><div class="highlight"><pre>.. custum_id:
+
+title
+=============
+</pre></div>
+</div>
+</div>
+<div class="section" id="id29">
+<h3>脚注<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>- 脚注即可以手动分配数字 [1]_ ，
+  也可以使用井号自动分配 [#]_ 。
+
+- 自动分配脚注 [#label]_ 也可以用
+  添加标签形式 [#label]_ 多次引用。
+
+- 还支持用星号嵌入符号式脚注 [#label]_ ，
+  如这个 [*]_ 和 这个 [*]_ 再加一个 [*]_
+  再加一个 [*]_ 再加一个 [*]_ 。
+  a [#f1]_ b [#f2]_。
+
+- 使用单词做标识亦可 [CIT2012]_ 。
+
+
+.. [1] 数字编号脚注。
+.. [#] 井号自动编号。
+.. [#label] 井号添加标签以便多次引用。
+.. [*] 星号自动用符号做脚注标记。
+.. [*] 星号自动用符号做脚注标记。
+.. [*] 星号自动用符号做脚注标记。
+.. [*] 星号自动用符号做脚注标记。
+.. [*] 星号自动用符号做脚注标记。
+.. [#f1] af
+.. [#f2] bf
+.. [CIT2012] 单词或其他规定格式。
+</pre></div>
+</div>
+<ul class="simple">
+<li>脚注即可以手动分配数字 <a class="footnote-reference" href="#id43" id="id30">[1]</a> ，
+也可以使用井号自动分配 <a class="footnote-reference" href="#id44" id="id31">[2]</a> 。</li>
+<li>自动分配脚注 <a class="footnote-reference" href="#label" id="id32">[3]</a> 也可以用
+添加标签形式 <a class="footnote-reference" href="#label" id="id33">[3]</a> 多次引用。</li>
+<li>还支持用星号嵌入符号式脚注 <a class="footnote-reference" href="#label" id="id34">[3]</a> ，
+如这个 <a class="footnote-reference" href="#id45" id="id35">[*]</a> 和 这个 <a class="footnote-reference" href="#id46" id="id36">[†]</a> 再加一个 <a class="footnote-reference" href="#id47" id="id37">[‡]</a> 再加一个 <a class="footnote-reference" href="#id48" id="id38">[§]</a> 再加一个 <a class="footnote-reference" href="#id49" id="id39">[¶]</a> 。
+a <a class="footnote-reference" href="#f1" id="id40">[4]</a> b <a class="footnote-reference" href="#f2" id="id41">[5]</a>。</li>
+<li>使用单词做标识亦可 <a class="reference internal" href="#cit2012" id="id42">[CIT2012]</a> 。</li>
+</ul>
+<table class="docutils footnote" frame="void" id="id43" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id30">[1]</a></td><td>数字编号脚注。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id44" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id31">[2]</a></td><td>井号自动编号。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="label" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id32">1</a>, <a class="fn-backref" href="#id33">2</a>, <a class="fn-backref" href="#id34">3</a>)</em> 井号添加标签以便多次引用。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id45" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id35">[*]</a></td><td>星号自动用符号做脚注标记。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id46" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id36">[†]</a></td><td>星号自动用符号做脚注标记。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id47" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id37">[‡]</a></td><td>星号自动用符号做脚注标记。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id48" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id38">[§]</a></td><td>星号自动用符号做脚注标记。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id49" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id39">[¶]</a></td><td>星号自动用符号做脚注标记。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id40">[4]</a></td><td>af</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id41">[5]</a></td><td>bf</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="cit2012" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id42">[CIT2012]</a></td><td>单词或其他规定格式。</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="id50">
+<h2>图片<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>.. figure:: _static/pic/logo.png
+   :width: 60
+
+   图：more
+
+- GitHub Logo: |octocat|
+- 带链接的图片：
+  |imglink|_
+- 下图向右浮动。
+   .. image:: _static/pic/logo.png
+      :align: right
+
+.. |octocat| image:: _static/pic/logo.png
+.. |imglink| image:: _static/pic/logo.png
+.. _imglink: https://github.com/
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/logo.png"><img alt="_images/logo.png" src="_images/logo.png" style="width: 60px;" /></a>
+<p class="caption">图：more</p>
+</div>
+<ul>
+<li><p class="first">GitHub Logo: <img alt="octocat" src="_images/logo.png" /></p>
+</li>
+<li><p class="first">带链接的图片：
+<a class="reference external" href="https://github.com/"><img alt="imglink" src="_images/logo.png" /></a></p>
+</li>
+<li><dl class="first docutils">
+<dt>下图向右浮动。</dt>
+<dd><img alt="_images/logo.png" class="first last align-right" src="_images/logo.png" />
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id51">
+<h2>表格<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id52">
+<h3>简单表格<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>+------------+------------+-----------+
+| Header 1   | Header 2   | Header 3  |
++============+============+===========+
+| body row 1 | column 2   | column 3  |
++------------+------------+-----------+
+| body row 2 | Cells may span columns.|
++------------+------------+-----------+
+| body row 3 | Cells may  | - Cells   |
++------------+ span rows. |           |
+| body row 4 |            |           |
++------------+------------+-----------+
+
+ .. table:: 示例表格
+   :class: classic
+
+   +---------+--------+--------+
+   | head1   | head2  | head3  |
+   +=========+========+========+
+   |         | cell   | cell   |
+   | rowspan +--------+--------+
+   |         | * colspan       |
+   |         | * another line  |
+   +---------+-----------------+
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="34%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Header 1</th>
+<th class="head">Header 2</th>
+<th class="head">Header 3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>body row 1</td>
+<td>column 2</td>
+<td>column 3</td>
+</tr>
+<tr class="row-odd"><td>body row 2</td>
+<td colspan="2">Cells may span columns.</td>
+</tr>
+<tr class="row-even"><td>body row 3</td>
+<td rowspan="2">Cells may
+span rows.</td>
+<td rowspan="2"><ul class="first last simple">
+<li>Cells</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>body row 4</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="classic docutils">
+<caption>示例表格</caption>
+<colgroup>
+<col width="36%" />
+<col width="32%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">head1</th>
+<th class="head">head2</th>
+<th class="head">head3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="2">rowspan</td>
+<td>cell</td>
+<td>cell</td>
+</tr>
+<tr class="row-odd"><td colspan="2"><ul class="first last simple">
+<li>colspan</li>
+<li>another line</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre>=====  =====  ======
+   Inputs     Output
+------------  ------
+  A      B    A or B
+=====  =====  ======
+False  False  False
+True   False  True
+False  True   True
+True   True   True
+=====  =====  ======
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="31%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Inputs</th>
+<th class="head">Output</th>
+</tr>
+<tr class="row-even"><th class="head">A</th>
+<th class="head">B</th>
+<th class="head">A or B</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="row-even"><td>True</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr class="row-odd"><td>False</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="row-even"><td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="csv">
+<h3>CSV表格<a class="headerlink" href="#csv" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>.. csv-table:: Frozen Delights!
+
+ :header: &quot;Treat&quot;, &quot;Quantity&quot;, &quot;Description&quot;
+ :widths: 15, 10, 30
+
+ &quot;Albatross&quot;, 2.99, &quot;On a stick!&quot;
+ &quot;Crunchy Frog&quot;, 1.49, &quot;If we took the bones out, it wouldn&#39;t be
+ crunchy, now would it?&quot;
+ &quot;Gannet Ripple&quot;, 1.99, &quot;On a stick!&quot;
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<caption>Frozen Delights!</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">header:</th><td class="field-body">&#8220;Treat&#8221;</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>Quantity</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">widths:</th><td class="field-body">15</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>10</td>
+<td>30</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Albatross</td>
+<td>2.99</td>
+<td>On a stick!</td>
+</tr>
+<tr class="row-odd"><td>Crunchy Frog</td>
+<td>1.49</td>
+<td>If we took the bones out, it wouldn&#8217;t be
+crunchy, now would it?</td>
+</tr>
+<tr class="row-even"><td>Gannet Ripple</td>
+<td>1.99</td>
+<td>On a stick!</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id53">
+<h3>列表格<a class="headerlink" href="#id53" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>.. list-table:: Frozen Delights!
+  :widths: 15 10 30
+  :header-rows: 1
+
+  * - Treat
+    - Quantity
+    - Description
+  * - Albatross
+    - 2.99
+    - On a stick!
+  * - Crunchy Frog
+    - 1.49
+    - If we took the bones out, it wouldn&#39;t be
+      crunchy, now would it?
+  * - Gannet Ripple
+    - 1.99
+    - On a stick!
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<caption>Frozen Delights!</caption>
+<colgroup>
+<col width="27%" />
+<col width="18%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Treat</th>
+<th class="head">Quantity</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Albatross</td>
+<td>2.99</td>
+<td>On a stick!</td>
+</tr>
+<tr class="row-odd"><td>Crunchy Frog</td>
+<td>1.49</td>
+<td>If we took the bones out, it wouldn&#8217;t be
+crunchy, now would it?</td>
+</tr>
+<tr class="row-even"><td>Gannet Ripple</td>
+<td>1.99</td>
+<td>On a stick!</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre>.. hlist::
+   :columns: 3
+
+   * 列表
+   * 的子
+   * 项会
+   * 水平
+   * 排列
+</pre></div>
+</div>
+<table class="hlist"><tr><td><ul class="simple">
+<li>列表</li>
+<li>的子</li>
+</ul>
+</td><td><ul class="simple">
+<li>项会</li>
+<li>水平</li>
+</ul>
+</td><td><ul class="simple">
+<li>排列</li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="id54">
+<h2>数学公式<a class="headerlink" href="#id54" title="Permalink to this headline">¶</a></h2>
+<p>在配置中添加：</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;sphinx.ext.mathjax&#39;</span><span class="p">]</span>
+<span class="n">mathjax_url</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;http://cdn.mathjax.org/mathjax/latest/MathJax.js?&#39;</span>
+                   <span class="s">&#39;config=TeX-AMS-MML_HTMLorMML&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>就可以使用math::块声明进行公式生成</p>
+<div class="highlight-python"><div class="highlight"><pre>.. math::
+   f(V_{in}, S_{low}, S_{high}, H) =
+   \begin{cases}
+         1 &amp; V_{in} \le S_{low} - H\\
+         0 &amp; V_{in} \ge S_{high} + H\\
+   \end{cases}
+   :label: equation_9_3
+</pre></div>
+</div>
+<div class="math" id="equation-equation_9_3">
+<span class="eqno">(1)</span>\[\begin{split}f(V_{in}, S_{low}, S_{high}, H) =
+\begin{cases}
+      1 &amp; V_{in} \le S_{low} - H\\
+      0 &amp; V_{in} \ge S_{high} + H\\
+\end{cases}\end{split}\]</div>
+</div>
+<div class="section" id="id55">
+<h2>注释<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>.. 注释
+
+..
+   缩进内容也是注释
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>.. seealso::
+
+   Module :py:mod:`zipfile`
+      标准模块 :py:mod:`zipfile` 的文档.
+
+   `GNU tar manual, Basic Tar Format &lt;http://link&gt;`_
+      归档文件的文档, 包含 GNU tar 扩展.
+
+.. productionlist::
+   try_stmt: try1_stmt | try2_stmt
+   try1_stmt: &quot;try&quot; &quot;:&quot; `suite`
+            : (&quot;except&quot; [`expression` [&quot;,&quot; `target`]] &quot;:&quot; `suite`)+
+            : [&quot;else&quot; &quot;:&quot; `suite`]
+            : [&quot;finally&quot; &quot;:&quot; `suite`]
+   try2_stmt: &quot;try&quot; &quot;:&quot; `suite`
+            : &quot;finally&quot; &quot;:&quot; `suite`
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt>Module <tt class="xref py py-mod docutils literal"><span class="pre">zipfile</span></tt></dt>
+<dd>标准模块 <tt class="xref py py-mod docutils literal"><span class="pre">zipfile</span></tt> 的文档.</dd>
+<dt><a class="reference external" href="http://link">GNU tar manual, Basic Tar Format</a></dt>
+<dd>归档文件的文档, 包含 GNU tar 扩展.</dd>
+</dl>
+</div>
+<pre>
+<strong id="grammar-token-try_stmt">try_stmt </strong> ::=  try1_stmt | try2_stmt
+<strong id="grammar-token-try1_stmt">try1_stmt</strong> ::=  &quot;try&quot; &quot;:&quot; <tt class="xref docutils literal"><span class="pre">suite</span></tt>
+               (&quot;except&quot; [<tt class="xref docutils literal"><span class="pre">expression</span></tt> [&quot;,&quot; <tt class="xref docutils literal"><span class="pre">target</span></tt>]] &quot;:&quot; <tt class="xref docutils literal"><span class="pre">suite</span></tt>)+
+               [&quot;else&quot; &quot;:&quot; <tt class="xref docutils literal"><span class="pre">suite</span></tt>]
+               [&quot;finally&quot; &quot;:&quot; <tt class="xref docutils literal"><span class="pre">suite</span></tt>]
+<strong id="grammar-token-try2_stmt">try2_stmt</strong> ::=  &quot;try&quot; &quot;:&quot; <tt class="xref docutils literal"><span class="pre">suite</span></tt>
+               &quot;finally&quot; &quot;:&quot; <tt class="xref docutils literal"><span class="pre">suite</span></tt>
+</pre>
+</div>
+<hr class="docutils" />
+<div class="section" id="id56">
+<h2>文档结尾<a class="headerlink" href="#id56" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>.. centered:: LICENSE AGREEMENT
+
+version: |version|
+
+release: |release|
+
+time: |today|
+</pre></div>
+</div>
+<p class="centered">
+<strong>LICENSE AGREEMENT</strong></p><p>version: 1.0.0</p>
+<p>release: 1.0.0</p>
+<p>time: December 28, 2014</p>
+<hr class="docutils" />
+<p>本文参考：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://jwch.sdut.edu.cn/book/rst.html#rst-tutorial">reStructuredText简明教程</a></li>
+<li><a class="reference external" href="http://www.worldhello.net/gotgithub/appendix/markups.html">附录：轻量级标记语言</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">reStructuredText Manual</a><ul>
+<li><a class="reference internal" href="#id1">文档主标题</a><ul>
+<li><a class="reference internal" href="#id2">二级标题</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sphinx">Sphinx工程的目录结构</a><ul>
+<li><a class="reference internal" href="#id3">模板修改</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">段落</a><ul>
+<li><a class="reference internal" href="#id5">空行分段</a></li>
+<li><a class="reference internal" href="#id6">自动续行</a></li>
+<li><a class="reference internal" href="#id7">不留白续行</a></li>
+<li><a class="reference internal" href="#id8">插入换行</a></li>
+<li><a class="reference internal" href="#id9">段落缩进</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">代码块</a></li>
+<li><a class="reference internal" href="#id11">列表</a><ul>
+<li><a class="reference internal" href="#id12">无序列表</a></li>
+<li><a class="reference internal" href="#id13">有序列表</a></li>
+<li><a class="reference internal" href="#id14">自动编号</a></li>
+<li><a class="reference internal" href="#id15">列表中的续行、段落和代码块</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id16">定义</a></li>
+<li><a class="reference internal" href="#id17">分割线</a></li>
+<li><a class="reference internal" href="#id18">字体</a><ul>
+<li><a class="reference internal" href="#id19">上标、下标</a></li>
+<li><a class="reference internal" href="#id20">等宽字体</a></li>
+<li><a class="reference internal" href="#id21">引言</a></li>
+<li><a class="reference internal" href="#id22">清除标记空白</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id23">链接</a><ul>
+<li><a class="reference internal" href="#url">URL自动连接</a></li>
+<li><a class="reference internal" href="#id24">文字连接：</a></li>
+<li><a class="reference internal" href="#id26">内部跳转</a></li>
+<li><a class="reference internal" href="#id28">章节之间跳转</a></li>
+<li><a class="reference internal" href="#id29">脚注</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id50">图片</a></li>
+<li><a class="reference internal" href="#id51">表格</a><ul>
+<li><a class="reference internal" href="#id52">简单表格</a></li>
+<li><a class="reference internal" href="#csv">CSV表格</a></li>
+<li><a class="reference internal" href="#id53">列表格</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id54">数学公式</a></li>
+<li><a class="reference internal" href="#id55">注释</a></li>
+<li><a class="reference internal" href="#id56">文档结尾</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="python.html"
+                        title="previous chapter">python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="software.html"
+                        title="next chapter">Linux Doc (UBUNTU distribution)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/reST.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="software.html" title="Linux Doc (UBUNTU distribution)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="python"
+             >previous</a> |</li>
+        <li><a href="index.html">myhome 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, conderls.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

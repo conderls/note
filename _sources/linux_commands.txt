@@ -1,0 +1,130 @@
+Linux 常用命令
+======================
+
+find
+-----------------
+find命令的作用是在目录中根据文件名搜索文件
+
+.. code-block:: bash
+
+  #列出当前目录及其子目录的所有文件和文件夹的完整路径。
+  $find
+
+  #在当前目录及其子目录中搜索文件名为Help.java的文件。
+  $find -name Help.java
+
+  #在当前目录及其子目录中搜索文件名为Help.java的文件(同上)。
+  $find . -name Help.java
+
+  #在当前目录及其子目录中查找指定权限的文件
+  $find -perm 755
+
+  #在当前目录及其子目录中查找指定用户username的文件
+  $find . -user username
+
+  #在当前目录及其子目录中查找5min内被访问过的文件
+  $find . -amin -5
+  #-amin 访问  -mmin 修改 -cmin 文件状态改变
+  # 以上时间精确到分钟 若精确到天:min -> time
+  # -5 5min内 +5 5min以上
+
+  #在当前目录及其子目录中查找文件大小限制的文件
+  $find -size +1000000c
+  #+ 大于某个数 - 小于某个数
+  #c 字节 可用单位还有：k、M、G
+
+  #使用正则表达式技术(-regex)
+  $find . -regex '.*b.*3'  #注意文件名匹配为全路径（即所有文件名为./filename形式）
+
+  $find -type b #在当前目录及其子目录下查找块设备文件。
+  $find -type d #在当前目录及其子目录下查文件夹。
+  $find -type c #在当前目录及其子目录下查找字符设备文件。
+  $find -type p #在当前目录及其子目录下查找管道文件。
+  $find -type l #在当前目录及其子目录下查找符号链接文件。
+  $find -type f #在当前目录及其子目录下查找普通文件。
+
+  #查找当前目录及其子目录下的文件夹，并将查找结果以ls -l的方式展现。
+  $find -type d -exec ls -l {} \;
+  # -exec 表示由find找到的结果会作为其后设定的命令的参数
+  # {} 表示find查找到的结果的每一项，
+  # \; 表-exec参数结束
+
+  #查找当前目录及其子目录下的文件夹，并将查找结果依次执行rm -rf命令，但是在执行命令前会有确认提示。
+  $find -type d -ok rm -rf {} \;
+
+  #设定目录展开程度选项：
+  $find . -maxdepth 1 -name "*.c" #不进入子目录查找
+
+grep
+----------------
+grep命令的作用是在目录中根据文件内容搜索文件
+
+.. code-block:: bash
+
+  #查找当前目录下的所有文件中包含Clock字符串的文件，不查找子目录
+  $grep Clock *
+
+  #查找当前目录下的所有文件中包含Clock字符串的文件，查找子目录
+  $grep -r Clock *
+
+  #查找当前目录下的所有文件中包含Clock字符串的文件，查找子目录，并显示行号
+  $grep -nr Clock *
+
+
+sed
+----------------
+sed (stream editor 流编辑器) 同cut类似，是一个面向行处理的工具，一次只处理一行内容，处理结果直接输出到标准输出，直至文件结束，但不会对文件做任何修改。
+
+.. code-block:: bash
+
+   $sed 'command' filename  #注意需要将命令用单引号括起来
+   $sed -e 'command1' -e 'command2' filename #多个命令需在每个命令前加-e
+
+   #删除文件中含字符'2'的行，
+   $sed '/2/d' filename
+
+   #输出含字符'2'的行,-n 选项要求只输出符合条件的行，否则会将每一行都输出
+   $sed -n '/2/p' filename
+
+   #输出10～20行
+   $sed -n '10,20p' filename
+
+   #将以d或D开头的行所有小写x改成大写X
+   $sed '/^[dD]/s/x/X/g' filename
+
+   #删除每一行前两个字符 删除后两个字符用's/..$//'
+   $sed 's/..//' filename
+
+   #在'patern'后加上'add'，&表示被匹配的部分
+   $sed 's/patern/&add/' filename
+
+   #将匹配'abc'和'ABC'字符串之间的行输出
+   $sed -n '/abc/,/ABC/p' filename
+
+   #在filename中'abc'行下插入insertfile的内容
+   $sed '/abc/r insertfile' filename
+
+   #将filename中含'line1'到'line5'的行写到新文件newfile
+   $sed '/line[1-5]/w newfile' filename
+
+   #在匹配'line'行下（上用-i选项）插入'insertline'
+   $sed '/line/a\insertline' filename
+
+   #将'abc'对应替换为'ABC'
+   $sed 'y/abc/ABC/' filename
+
+   #找到'abc'的行，在其下一行(n;)中将'abc'每个字符对应替换为'ABC'
+   $sed '/abc/{n;y/abc/ABC/;}' filename
+
+vi
+---------
+
+替换
++++++++++
+
+::
+
+  :1,$/\([0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\)/'\1'/g
+  在xxxx-xx-xx日期格式两侧加单引号
+  \{n\}  表示重复此符号前的元素n遍，[0-9]\{4\}表示一个四位数
+  \(\)   表示匹配内容暂存，\1引用第一个暂存的内容

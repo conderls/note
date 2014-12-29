@@ -1,0 +1,26 @@
+git
+=======================
+
+git config
+-----------------
+* `--system`
+
+  读写/etc/gitconfig文件，对系统中所有用户适用。
+* `--global`
+
+  读写~/.gitconfig文件，对当前用户适用。
+* .git/config文件
+
+  对当前项目适用
+
+.. code-block:: bash
+
+  $git config --global user.name "name"
+  $git config --global user.email count@example.com
+  $git config --global core.editor vim
+  $git config --global merge.tool vimdiff
+
+  $git config --list
+  or
+  $cat ~/.gitconfig
+  to check the config information
